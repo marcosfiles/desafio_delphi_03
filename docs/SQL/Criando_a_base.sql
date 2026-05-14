@@ -1,0 +1,1 @@
+CREATE DATABASE '127.0.0.1:C:\Delphi\projeto\data\teste_criacao.fdb' USER 'SYSDBA' PASSWORD 'masterkey' PAGE_SIZE 8192 DEFAULT CHARACTER SET WIN1252;
