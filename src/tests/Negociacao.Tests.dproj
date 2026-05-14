@@ -1,0 +1,77 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{C7A4F9C5-7A3A-4E2B-9739-5A9F9373C6B7}</ProjectGuid>
+        <ProjectVersion>20.1</ProjectVersion>
+        <FrameworkType>None</FrameworkType>
+        <Base>true</Base>
+        <Config Condition="'$(Config)'==''">Debug</Config>
+        <Platform Condition="'$(Platform)'==''">Win32</Platform>
+        <TargetedPlatforms>3</TargetedPlatforms>
+        <AppType>Console</AppType>
+        <MainSource>Negociacao.Tests.dpr</MainSource>
+        <ProjectName Condition="'$(ProjectName)'==''">Negociacao.Tests</ProjectName>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Base)'!=''">
+        <DCC_Namespace>System;Xml;Data;Datasnap;Web;Soap;Winapi;Vcl;$(DCC_Namespace)</DCC_Namespace>
+        <SanitizedProjectName>Negociacao_Tests</SanitizedProjectName>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Base_Win32)'!=''">
+        <DCC_UsePackage>$(DCC_UsePackage)</DCC_UsePackage>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Cfg_1)'!=''">
+        <Version>7.0</Version>
+        <DCC_DebugInformation>true</DCC_DebugInformation>
+        <DCC_LocalDebugSymbols>true</DCC_LocalDebugSymbols>
+        <DCC_Define>DEBUG;$(DCC_Define)</DCC_Define>
+        <DCC_Optimize>false</DCC_Optimize>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Cfg_2)'!=''">
+        <Version>7.0</Version>
+        <DCC_LocalDebugSymbols>false</DCC_LocalDebugSymbols>
+        <DCC_Define>RELEASE;$(DCC_Define)</DCC_Define>
+        <DCC_SymbolReferenceInfo>0</DCC_SymbolReferenceInfo>
+        <DCC_DebugInformation>false</DCC_DebugInformation>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Cfg_1_Win32)'!=''">
+        <DCC_ExeOutput>..\bin\tests\Win32\Debug</DCC_ExeOutput>
+        <DCC_DcuOutput>..\bin\tests\Win32\Debug\dcu</DCC_DcuOutput>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Cfg_2_Win32)'!=''">
+        <DCC_ExeOutput>..\bin\tests\Win32\Release</DCC_ExeOutput>
+        <DCC_DcuOutput>..\bin\tests\Win32\Release\dcu</DCC_DcuOutput>
+    </PropertyGroup>
+    <ItemGroup>
+        <DelphiCompile Include="$(MainSource)">
+            <MainSource>MainSource</MainSource>
+        </DelphiCompile>
+        <DCCReference Include="Domain\Test.Domain.NegociacaoItem.pas"/>
+        <DCCReference Include="Domain\Test.Domain.Negociacao.pas"/>
+        <DCCReference Include="Domain\Test.Domain.NegociacaoEstado.pas"/>
+        <DCCReference Include="Domain\Test.Domain.ValidadorCredito.pas"/>
+        <DCCReference Include="..\src\App\App.Types.pas"/>
+        <DCCReference Include="..\src\Core\Repositories\Core.Repositories.Credito.pas"/>
+        <DCCReference Include="..\src\Core\Repositories\Core.Repositories.Negociacao.pas"/>
+        <DCCReference Include="..\src\Domain\Domain.CreditoProdutorDistribuidor.pas"/>
+        <DCCReference Include="..\src\Domain\Domain.Negociacao.pas"/>
+        <DCCReference Include="..\src\Domain\Domain.NegociacaoItem.pas"/>
+        <DCCReference Include="..\src\Domain\Strategies\Domain.ValidadorCredito.Intf.pas"/>
+        <DCCReference Include="..\src\Domain\Strategies\Domain.ValidadorCredito.Padrao.pas"/>
+        <DCCReference Include="..\src\Domain\States\Domain.NegociacaoEstado.Intf.pas"/>
+        <DCCReference Include="..\src\Domain\States\Domain.NegociacaoEstado.Pendente.pas"/>
+        <DCCReference Include="..\src\Domain\States\Domain.NegociacaoEstado.Aprovada.pas"/>
+        <DCCReference Include="..\src\Domain\States\Domain.NegociacaoEstado.Concluida.pas"/>
+        <DCCReference Include="..\src\Domain\States\Domain.NegociacaoEstado.Cancelada.pas"/>
+        <BuildConfiguration Include="Release">
+            <Key>Cfg_2</Key>
+            <CfgParent>Base</CfgParent>
+        </BuildConfiguration>
+        <BuildConfiguration Include="Base">
+            <Key>Base</Key>
+        </BuildConfiguration>
+        <BuildConfiguration Include="Debug">
+            <Key>Cfg_1</Key>
+            <CfgParent>Base</CfgParent>
+        </BuildConfiguration>
+    </ItemGroup>
+    <Import Project="$(BDS)\Bin\CodeGear.Delphi.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Delphi.Targets')"/>
+</Project>
